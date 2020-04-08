@@ -9,18 +9,7 @@ function updateChoices(item, data) {
   if (choices) item.setChoices(choices);
 }
 
-// Update Google Form
-function updateForm() {
-  //  Call PropertiesService
-  let scriptProps = PropertiesService.getScriptProperties();
-  //  Define question to replace options for
-  let question = {
-    title: scriptProps.getProperty("title"),
-    sheet: scriptProps.getProperty("sheet"),
-    range: scriptProps.getProperty("range"),
-    formId: scriptProps.getProperty("formId"),
-  };
-
+function updateQuestion(question) {
   //  Get data from Spreadsheet dynamically
   let ss = SpreadsheetApp.getActiveSpreadsheet().getSheetByName(question.sheet);
   let column = ss.getRange(question.range);
@@ -41,5 +30,29 @@ function updateForm() {
     if (item.getTitle() == question.title) {
       updateChoices(item.asListItem(), data);
     }
+  });
+}
+
+// Update Google Form
+function updateForm() {
+  //  Define questions to replace dropdown options for
+  let questions = [
+    {
+      title: <Question Name>,
+      sheet: <Sheet Name>,
+      range: <Range in A1 notation>,
+      formId: <Form ID>
+    },
+    {
+      title: <Question Name>,
+      sheet: <Sheet Name>,
+      range: <Range in A1 notation>,
+      formId: <Form ID>
+    }
+  ];
+
+  // Update each question
+  questions.map(function(question) {
+    updateQuestion(question);
   });
 }
