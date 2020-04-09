@@ -67,13 +67,13 @@ function getOcrText(imageId) {
 function onFormSubmit(e) {
   // Define Google Sheet responses details
   const sheet = {
-    name: 'Responses',
-    col: 3,
+    name: '<Sheet Name>',
+    col: '<Column Number>',
     row: e.range.rowStart // Prevent issues with concurrent uploads
   };
 
   // Define Google Form question item
-  const formQuestion = 'Image';
+  const formQuestion = '<Form Question Name>';
 
   // Get uploaded image ID
   let imageUrl = e.namedValues[formQuestion][0];
