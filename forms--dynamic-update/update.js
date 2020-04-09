@@ -1,18 +1,16 @@
 // Update Choices
 function updateChoices(item, data) {
   //  Build dropdown items
-  let choices = data.map(function(datum) {
-    return item.createChoice(datum[0]);
-  });
+  let choices = data.map((d) => item.createChoice(d[0]));
 
   //  Set choices to Form
   if (choices) item.setChoices(choices);
 }
 
-function updateQuestion(question) {
+function updateQuestion(q) {
   //  Get data from Spreadsheet dynamically
-  let ss = SpreadsheetApp.getActiveSpreadsheet().getSheetByName(question.sheet);
-  let column = ss.getRange(question.range);
+  const ss = SpreadsheetApp.getActiveSpreadsheet().getSheetByName(q.sheet);
+  let column = ss.getRange(q.range);
 
   //  Get all values, even empty ones
   let colVals = column.getValues();
@@ -22,12 +20,12 @@ function updateQuestion(question) {
   let data = ss.getRange(2, column.getColumn(), lastRow).getValues();
 
   //  Opem Form to update
-  let form = FormApp.openById(question.formId);
+  let form = FormApp.openById(q.formId);
   let items = form.getItems();
 
   //  Loop through questions
-  items.map(function(item) {
-    if (item.getTitle() == question.title) {
+  items.forEach((item) => {
+    if (item.getTitle() == q.title) {
       updateChoices(item.asListItem(), data);
     }
   });
@@ -36,7 +34,7 @@ function updateQuestion(question) {
 // Update Google Form
 function updateForm() {
   //  Define questions to replace dropdown options for
-  let questions = [
+  const questions = [
     {
       title: <Question Name>,
       sheet: <Sheet Name>,
@@ -52,7 +50,5 @@ function updateForm() {
   ];
 
   // Update each question
-  questions.map(function(question) {
-    updateQuestion(question);
-  });
+  questions.forEach((q) => updateQuestion(q));
 }

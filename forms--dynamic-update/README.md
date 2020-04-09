@@ -32,7 +32,7 @@ Create a new [Container-bound script](https://developers.google.com/apps-script/
     | `range`  | {Range (column) that contains the data} |
     | `formId` | {ID of the Google Form to update}       |
 
-### Allow OAuth access
+### Allow OAuth2 access
 
 1.  From the Apps Script editor, click **Run** ->
     **Run Function** -> **Update Form**.
@@ -48,11 +48,3 @@ Create a new [Container-bound script](https://developers.google.com/apps-script/
 1. Under **Events**, select **onEdit()**.
 1. Optionally, click **Notifications** to configure how and when you are contacted by email if your triggered function fails.
 1. Click **Save**.
-
-## Examples and use cases covered in this example
-
-- **Using Project Properties** Example of how to use Project Properties
-  (Specifically Script Properties) to save data needed for script execution.
-  Script Properties are useful in situations where values are needed for
-  script execution, but shouldn't be put into source files. In this case, we
-  put the Spreadsheet and Form data into the Script Properties.
