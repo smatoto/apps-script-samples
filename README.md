@@ -4,4 +4,4 @@
 
 A random collection of Apps Script examples.
 
-Please visit [gsuitedevs/apps-script-sample](https://github.com/gsuitedevs/apps-script-samples) for official Google Apps Script samples.
+Please visit [gsuitedevs/apps-script-samples](https://github.com/gsuitedevs/apps-script-samples) for official Google Apps Script samples.

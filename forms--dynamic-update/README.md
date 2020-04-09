@@ -14,16 +14,13 @@ Create a new [Container-bound script](https://developers.google.com/apps-script/
 
 1.  Within the Google Sheet that contains the dynamic data, select **Tools** > **Script Editor**
 
-    **Note: Because bound scripts do not appear in Google Drive, that menu is the only way to find or open the script.**
+    _Note: Because bound scripts do not appear in Google Drive, that menu is the only way to find or open the script._
 
 1.  Copy the contents of **update.js** into your script file (_i.e. Code.gs_).
 
-### Set Properties
+### Set Questions
 
-1.  From the Apps Script editor, click **File** ->
-    **Project Properties** -> **Script Properties**.
-
-1.  Add the following key-value pairs.
+1.  From the Apps Script editor, update the question constant with the following values:
 
     | Key      | Value                                   |
     | -------- | --------------------------------------- |
@@ -31,6 +28,8 @@ Create a new [Container-bound script](https://developers.google.com/apps-script/
     | `sheet`  | {Sheet name that contains the data}     |
     | `range`  | {Range (column) that contains the data} |
     | `formId` | {ID of the Google Form to update}       |
+
+1.  Add more questions (elements) to the array of questions if required.
 
 ### Allow OAuth2 access
 
