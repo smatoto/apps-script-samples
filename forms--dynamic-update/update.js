@@ -36,16 +36,16 @@ function updateForm() {
   //  Define questions to replace dropdown options for
   const questions = [
     {
-      title: <Question Name>,
-      sheet: <Sheet Name>,
-      range: <Range in A1 notation>,
-      formId: <Form ID>
+      title: '<Question Name>',
+      sheet: '<Sheet Name>',
+      range: '<Range in A1 notation>',
+      formId: '<Form ID>'
     },
     {
-      title: <Question Name>,
-      sheet: <Sheet Name>,
-      range: <Range in A1 notation>,
-      formId: <Form ID>
+      title: '<Question Name>',
+      sheet: '<Sheet Name>',
+      range: '<Range in A1 notation>',
+      formId: '<Form ID>'
     }
   ];
 
