@@ -1,10 +1,10 @@
 # Google Forms OCR
 
+_This is not an official Google product_
+
 ## Image upload OCR (Optical character recognition) using GCP Vision API
 
 This script allows OCR via Vision API for Image upload using Google Forms.
-
-_This is not an official Google product_
 
 ## Deploying the Script
 
@@ -45,7 +45,7 @@ _Note: This is required in order to grant the Vision API access to the uploaded 
 1.  Change permissions to **On - Anyone with the link**.
 1.  Click **Save** changes and click **Done**..
 
-### Allow OAuth2 access
+### Run script and allow OAuth2 access
 
 1.  From the Apps Script editor, click **Run** ->
     **Run Function** -> **onFormSubmit**.

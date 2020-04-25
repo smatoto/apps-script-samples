@@ -11,7 +11,9 @@ This script allows extraction of Google Forms Responses via the [FormService](ht
 - This script utilizes the [FormService](https://developers.google.com/apps-script/reference/forms) to extract responses within Google Forms.
 - The specific function used to extract responses is [getResponses(timestamp)](https://developers.google.com/apps-script/reference/forms/form#getresponsestimestamp). This is the only function that would work in scenarios wherein Google Forms has 60K+ responses. Using [getResponses()](<https://developers.google.com/apps-script/reference/forms/form#getResponses()>)—without providing the timestamp parameter— will result into a backend error due to the large number of responses fetched on a single request.
 
-### :warning: This script **deletes the latest responses** (based on the timestamp provided) from the Google Form after it has been saved into a separate Google Sheet. The function [deleteResponse(responseId)](https://developers.google.com/apps-script/reference/forms/form#deleteresponseresponseid) is called to delete the latest responses so the [getResponses(timestamp)](https://developers.google.com/apps-script/reference/forms/form#getresponsestimestamp) can fetch the other responses (that [getResponses()](<https://developers.google.com/apps-script/reference/forms/form#getResponses()>) cannot) from the Form.
+## :warning: This script **deletes the latest responses** (based on the timestamp provided) from the Google Form after it has been saved into a separate Google Sheet.
+
+The function [deleteResponse(responseId)](https://developers.google.com/apps-script/reference/forms/form#deleteresponseresponseid) is called to delete the latest responses so the [getResponses(timestamp)](https://developers.google.com/apps-script/reference/forms/form#getresponsestimestamp) can fetch the other responses (that [getResponses()](<https://developers.google.com/apps-script/reference/forms/form#getResponses()>) cannot) from the Form.
 
 - To use this script effectively, repetition of the following cycle is required as long as there are responses stuck in Google Forms:
 
