@@ -1,37 +1,48 @@
-// Update Choices
+/**
+ * Build and update the Google Form item choice
+ * @param {ListItem} item the list item to update
+ * @param {Array} data Array string of choices from Sheets
+ */
 function updateChoices(item, data) {
   //  Build dropdown items
-  let choices = data.map((d) => item.createChoice(d[0]));
+  const choices = data.map((d) => item.createChoice(d[0]));
 
   //  Set choices to Form
   if (choices) item.setChoices(choices);
 }
 
+/**
+ * Fetch the item choices based on question and Sheet range provided
+ * @param {Array} q Array of question objects
+ */
 function updateQuestion(q) {
   //  Get data from Spreadsheet dynamically
   const ss = SpreadsheetApp.getActiveSpreadsheet().getSheetByName(q.sheet);
-  let column = ss.getRange(q.range);
+  const column = ss.getRange(q.range);
 
   //  Get all values, even empty ones
-  let colVals = column.getValues();
+  const colVals = column.getValues();
   //  Filter rows of non-empty values
-  let lastRow = colVals.filter(String).length;
+  const lastRow = colVals.filter(String).length;
   //  Get values from column excluding non-empty rows
-  let data = ss.getRange(2, column.getColumn(), lastRow).getValues();
+  const data = ss.getRange(2, column.getColumn(), lastRow).getValues();
 
   //  Opem Form to update
-  let form = FormApp.openById(q.formId);
-  let items = form.getItems();
+  const form = FormApp.openById(q.formId);
+  const items = form.getItems();
 
   //  Loop through questions
   items.forEach((item) => {
-    if (item.getTitle() == q.title) {
+    if (item.getTitle() === q.title) {
       updateChoices(item.asListItem(), data);
     }
   });
 }
 
-// Update Google Form
+/**
+ * Main function: RUN THIS!
+ * Update the Google Form
+ */
 function updateForm() {
   //  Define questions to replace dropdown options for
   const questions = [

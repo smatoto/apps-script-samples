@@ -21,14 +21,14 @@ function getOcrText(imageId) {
   const baseUrl = 'https://vision.googleapis.com/v1/images';
 
   // Build API endpoint URL
-  let apiEndpoint = `${baseUrl}:annotate?key=${apiKey}`;
+  const apiEndpoint = `${baseUrl}:annotate?key=${apiKey}`;
 
   // Fetch Drive image data
-  let imageUrl = `https://drive.google.com/uc?export=view&id=${imageId}`;
+  const imageUrl = `https://drive.google.com/uc?export=view&id=${imageId}`;
 
-  let imageBytes = UrlFetchApp.fetch(imageUrl).getContent();
+  const imageBytes = UrlFetchApp.fetch(imageUrl).getContent();
   // Build request payload
-  let payload = JSON.stringify({
+  const payload = JSON.stringify({
     requests: [
       {
         image: {
@@ -45,7 +45,7 @@ function getOcrText(imageId) {
   });
 
   // Send request to Vision API
-  let resp = UrlFetchApp.fetch(apiEndpoint, {
+  const resp = UrlFetchApp.fetch(apiEndpoint, {
     method: 'POST',
     contentType: 'application/json',
     payload: payload,
@@ -53,8 +53,8 @@ function getOcrText(imageId) {
   }).getContentText();
 
   // Fetch and parse Vision API response
-  let data = JSON.parse(resp);
-  let text = data.responses[0].textAnnotations[0].description;
+  const data = JSON.parse(resp);
+  const text = data.responses[0].textAnnotations[0].description;
 
   // Return extracted OCR text
   return text;
@@ -76,11 +76,11 @@ function onFormSubmit(e) {
   const formQuestion = '<Form Question Name>';
 
   // Get uploaded image ID
-  let imageUrl = e.namedValues[formQuestion][0];
-  let imageId = imageUrl.substring(33, imageUrl.length);
+  const imageUrl = e.namedValues[formQuestion][0];
+  const imageId = imageUrl.substring(33, imageUrl.length);
 
   // Extract OCR text from uploaded image
-  let ocrText = getOcrText(imageId);
+  const ocrText = getOcrText(imageId);
 
   // Write OCR text to Google Sheets
   writeSheet(sheet, ocrText);

@@ -1,0 +1,32 @@
+{
+  "name": "smatoto-apps-script-samples",
+  "version": "1.0.0",
+  "description": "Collection or random Google Apps Script samples",
+  "author": "Sermil Matoto",
+  "license": "MIT",
+  "homepage": "https://github.com/smatoto/apps-script-samples#readme",
+  "bugs": {
+    "url": "https://github.com/smatoto/apps-script-samples/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/smatoto/apps-script-samples.git"
+  },
+  "keywords": [
+    "Apps Script",
+    "JavaScript"
+  ],
+  "scripts": {
+    "lint": "./node_modules/.bin/eslint **/*.js --fix --quiet"
+  },
+  "dependencies": {
+    "eslint-plugin-async-await": "0.0.0"
+  },
+  "devDependencies": {
+    "eslint": "^6.8.0",
+    "eslint-config-google": "^0.14.0"
+  },
+  "eslintIgnore": [
+    "**/node_modules/**"
+  ]
+}

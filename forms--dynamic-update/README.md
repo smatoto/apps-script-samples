@@ -1,10 +1,10 @@
 # Google Forms Dynamic Update
 
+_This is not an official Google product_
+
 ## Dynamic dropdown choices update from Google Sheets
 
 This script allows automatic update of Google Form dropdown choices based on Google Sheet data.
-
-_This is not an official Google product_
 
 ## Deploying the Script
 
@@ -20,7 +20,7 @@ Create a new [Container-bound script](https://developers.google.com/apps-script/
 
 ### Set Questions
 
-1.  From the Apps Script editor, update the question constant with the following values:
+1.  From the Apps Script editor, update the questions by modifying or adding new array items (objects):
 
     | Key      | Value                                   |
     | -------- | --------------------------------------- |

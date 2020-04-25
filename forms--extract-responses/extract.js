@@ -13,22 +13,22 @@ function getResponses(timestamp) {
   let responseIds = [];
 
   // Get Form question titles
-  let formHeaders = getHeaders(formItems);
+  const formHeaders = getHeaders(formItems);
 
   // Get Form responses in tabular format (2D Array)
-  let formResponses = responses.map(response => {
+  const formResponses = responses.map((response) => {
     // Get reponses for each Form Item
-    let rowResponse = formItems.map(formItem =>
-      response.getResponseForItem(formItem)
-        ? response.getResponseForItem(formItem).getResponse()
-        : ''
+    const rowResponse = formItems.map((formItem) =>
+      response.getResponseForItem(formItem) ?
+        response.getResponseForItem(formItem).getResponse() :
+        ''
     );
 
     // Add response timestamp on the beginning of response
-    let dateString = Utilities.formatDate(
-      response.getTimestamp(),
-      timezone,
-      'MM/dd/yyyy HH:mm:ss'
+    const dateString = Utilities.formatDate(
+        response.getTimestamp(),
+        timezone,
+        'MM/dd/yyyy HH:mm:ss'
     );
     rowResponse.unshift(dateString);
 
@@ -55,27 +55,30 @@ function getResponses(timestamp) {
  */
 function extractResponses() {
   // Specify name for Sheets backup file
-  const newSheetName = 'Extracted Responses';
+  const newSheetName = 'Rapid Assessment Responses';
   // Set timestamp
-  const startTime = 'April 11, 2020 12:00:00';
+  const startTime = 'April 7, 2020, 11:00:00';
   const timestamp = new Date(startTime);
 
   // Get responses and save to Sheets
-  let formData = getResponses(timestamp);
+  const formData = getResponses(timestamp);
 
   // Get responseIds and remove from formData object - will be used for deletion
-  let responseIds = formData.responseIds;
+  const responseIds = formData.responseIds;
   delete formData.responseIds;
+  // Get last responseId for validation
+  console.log(responseIds[responseIds.length - 1]);
 
   // Add sheetName to formData object
   formData.sheetName = newSheetName;
-  // Save responses to Sheet
-  let saved = saveResponses(formData);
 
   // DEBUG
   respCount = formData.responses.length;
   console.log(`Time: ${timestamp}\nResponses: ${respCount} found`);
 
-  // Delete responses that were saved on Sheets
-  // deleteResponses(saved, responseIds); // comment out when debugging
+  // Save responses to Sheet
+  const saved = saveResponses(formData);
+
+  // Save date - for response deletion
+  cacheDate(startTime);
 }
