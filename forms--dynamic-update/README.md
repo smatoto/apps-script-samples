@@ -16,6 +16,7 @@ Create a new [Container-bound script](https://developers.google.com/apps-script/
 
     _Note: Because bound scripts do not appear in Google Drive, that menu is the only way to find or open the script._
 
+1.  Remove all the previous code from _code.gs_.
 1.  Copy the contents of **update.js** into your script file (_i.e. Code.gs_).
 
 ### Set Questions
@@ -34,7 +35,7 @@ Create a new [Container-bound script](https://developers.google.com/apps-script/
 ### Allow OAuth2 access
 
 1.  From the Apps Script editor, click **Run** ->
-    **Run Function** -> **Update Form**.
+    **Run Function** -> **updateForm**.
 1.  Click on _Review Permissions_ on the **Authorization Required** dialog.
 1.  Select your Google Account.
 1.  Review the scopes required, then click _Allow_.
@@ -42,8 +43,15 @@ Create a new [Container-bound script](https://developers.google.com/apps-script/
 ### Create an installable trigger
 
 1. From the script editor, choose **Edit > Current project's triggers**.
-1. Click the link that says: **No triggers set up. Click here to add one now**.
-1. Under **Run**, select the name of function you want to trigger.
-1. Under **Events**, select **onEdit()**.
+1. Click the blue button on the lower-right: **+ Add Trigger**.
+1. Under **Choose which function to run**, select **updateForm**.
+1. Under **Which runs at deployment**, select **Head**.
+1. Under **Select event source**, select **From spreadsheet**.
+1. Under **Select event type**, select **on edit**.
 1. Optionally, click **Notifications** to configure how and when you are contacted by email if your triggered function fails.
 1. Click **Save**.
+
+### Test if Google Form choices are synced with the Google Sheet data
+
+1. Open the Google Sheet that contains the range of choices specified as source.
+1. Modify the choices, then check the Google Form dropdown choices for updates.

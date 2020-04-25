@@ -27,14 +27,14 @@ function postUpdate(incident) {
 
   // Parse dates
   const beginString = Utilities.formatDate(
-    new Date(begin),
-    'GMT',
-    'MM-dd-yyyy HH:mm:ss z'
+      new Date(begin),
+      'GMT',
+      'MM-dd-yyyy HH:mm:ss z'
   );
   const createdString = Utilities.formatDate(
-    new Date(created),
-    'GMT',
-    'MM-dd-yyyy HH:mm:ss z'
+      new Date(created),
+      'GMT',
+      'MM-dd-yyyy HH:mm:ss z'
   );
 
   /**
@@ -91,7 +91,7 @@ function getIncidents() {
   });
 
   console.log(
-    `Found ${jsonResp.length} incident(s): ${incidents.length} are new.`
+      `Found ${jsonResp.length} incident(s): ${incidents.length} are new.`
   );
 
   // Iterate through each new item

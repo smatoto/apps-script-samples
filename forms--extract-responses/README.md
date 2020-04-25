@@ -59,3 +59,5 @@ Create a new [Container-bound script](https://developers.google.com/apps-script/
 ### View Execution Logs (optional)
 
 - Execution logs can be viewed via the [Stackdriver Logging](https://developers.google.com/apps-script/guides/logging#stackdriver_logging) interface in the Developer Console. This provides logs that persist for many days after their creation.
+
+_Feel free to contact the author if you have questions about this script / scenario._
