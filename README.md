@@ -4,4 +4,9 @@
 
 A random collection of Apps Script examples.
 
+- [Hangouts Chat notifications for GCP status updates](https://github.com/smatoto/apps-script-samples/tree/master/chat--gcp-status)
+- [Google Forms dynamic dropdown update via Google Sheets](https://github.com/smatoto/apps-script-samples/tree/master/forms--dynamic-update)
+- [Google Forms responses extraction](https://github.com/smatoto/apps-script-samples/tree/master/forms--extract-responses)
+- [Google Forms image upload OCR via Vision API](https://github.com/smatoto/apps-script-samples/tree/master/forms--vision-ocr)
+
 Please visit [gsuitedevs/apps-script-samples](https://github.com/gsuitedevs/apps-script-samples) for official Google Apps Script samples.

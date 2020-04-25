@@ -8,7 +8,7 @@ This script allows OCR via Vision API for Image upload using Google Forms.
 
 ## Deploying the Script
 
-### Copy and Editthe script
+### Copy and Edit the script
 
 **Note**: Make sure that you already have a Google Form that [collects image attachments](https://support.google.com/a/users/answer/9308632?hl=en) from respondents.
 
@@ -18,6 +18,7 @@ Create a new [Container-bound script](https://developers.google.com/apps-script/
 
     _Note: Because bound scripts do not appear in Google Drive, that menu is the only way to find or open the script._
 
+1.  Remove all the previous code from _code.gs_.
 1.  Copy the contents of **ocr.js** into your script file (_i.e. Code.gs_).
 1.  Modify the **sheet name** on _Line 70_ of the script file to match the sheet name where responses are stored. By default, Google names the sheet as _Form Responses 1_
 1.  Modify the **column number** (where A is 1, B is 2, etc.) on _Line 71_ of the script file to match the column number on the responses Sheet where the OCR text will be written.
@@ -56,8 +57,15 @@ _Note: This is required in order to grant the Vision API access to the uploaded 
 ### Create an installable trigger
 
 1. From the script editor, choose **Edit > Current project's triggers**.
-1. Click the link that says: **No triggers set up. Click here to add one now**.
-1. Under **Run**, select the name of function you want to trigger.
-1. Under **Events**, select **onFormSubmit()**.
+1. Click the blue button on the lower-right: **+ Add Trigger**.
+1. Under **Choose which function to run**, select **onFormSubmit**.
+1. Under **Which runs at deployment**, select **Head**.
+1. Under **Select event source**, select **From spreadsheet**.
+1. Under **Select event type**, select **On form submit**.
 1. Optionally, click **Notifications** to configure how and when you are contacted by email if your triggered function fails.
 1. Click **Save**.
+
+### Test the script
+
+1. Open the Google Form that allows image uploads, then upload an image as part of the response.
+1. After submitting the response, open the responses Google Sheet to verify if OCR text is generated.
