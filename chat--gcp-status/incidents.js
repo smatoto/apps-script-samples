@@ -1,10 +1,23 @@
-// URL of Blog RSS feed
+/**
+ * Official GCP status JSON feed
+ * Please visit https://status.cloud.google.com/
+ */
 const GCP_JSON_FEED = 'https://status.cloud.google.com/incidents.json';
 /**
  * Webhook URL of the Hangouts Chat room
  * https://developers.google.com/hangouts/chat/how-tos/webhooks#define_an_incoming_webhook
  */
 const WEBHOOK_URL = 'ADD WEBHOOK URL HERE';
+
+/**
+ * Hangouts Chat user_id of primary contact
+ * https://developers.google.com/hangouts/chat/reference/message-formats/basic#messages_that_mention_specific_users
+ * Enables mentioning of a user for incidents that doesn't have HIGH severity
+ * If you'd like to enable this feature, perform the following:
+ * - Add the user_id on line 19
+ * - Change the FALSE expression on line 55 to PRIMARY_CONTACT
+ */
+const PRIMARY_CONTACT = 'ADD USER_ID HERE'; // Optional
 
 /**
  * Send message to Google Chat room
@@ -21,6 +34,7 @@ function postUpdate(incident) {
     created,
     external_desc,
     ['most-recent-update']: update,
+    severity,
     service_name,
     uri
   } = incident;
@@ -31,8 +45,8 @@ function postUpdate(incident) {
       'GMT',
       'MM-dd-yyyy HH:mm:ss z'
   );
-  const createdString = Utilities.formatDate(
-      new Date(created),
+  const updateString = Utilities.formatDate(
+      new Date(update.when),
       'GMT',
       'MM-dd-yyyy HH:mm:ss z'
   );
@@ -41,12 +55,24 @@ function postUpdate(incident) {
    * Build Hangouts Chat simple message
    * https://developers.google.com/hangouts/chat/reference/message-formats/basic
    */
+  let message = severity === 'high' ? '<users/all>' : '';
   const title = `*${external_desc.trim()}*`;
   const start = `\`Incident start\`: \`${beginString}\``;
-  const upd = `\`Last update\`: \`${createdString}\``;
+  const upd = `\`Last update\`: \`${updateString}\``;
   const svc = `\`Service impacted\`: \`${service_name}\``;
+  const sev = `\`Severity\`: \`${severity}\``;
   const link = `<https://status.cloud.google.com${uri}|Click here to access the incident page>`;
-  const message = `<users/all> ${title}\n${start}\n${upd}\n${svc}\n${link}\n${update.text}`;
+
+  // Truncate the update message to fit Chat message limit
+  const txtLen = update.text.length;
+  const text =
+    txtLen < 3000 ?
+      update.text :
+      update.text.substring(0, 3000) +
+        `*---Message too long, truncating. See <https://status.cloud.google.com${uri}|incident page> for full details.---*`;
+
+  // Build full message
+  message += ` ${title}\n${start}\n${upd}\n${svc}\n${sev}\n${link}\n${text}`;
 
   // Build request parameters
   const options = {
@@ -82,29 +108,31 @@ function getIncidents() {
 
   // Fetch items from RSS feed
   const response = UrlFetchApp.fetch(GCP_JSON_FEED).getContentText();
-  const jsonResp = JSON.parse(response);
+  const jsonResp = JSON.parse(response).reverse();
 
-  // Filter new items based on last post date
+  // DEDUP: filter new items based on last post date
   const incidents = jsonResp.filter((jsonResponse) => {
-    const created = new Date(jsonResponse.created);
-    if (created.getTime() > lastPost.getTime()) return jsonResponse;
+    const lastUpdate = new Date(jsonResponse['most-recent-update'].when);
+    if (lastUpdate.getTime() > lastPost.getTime()) return jsonResponse;
   });
 
+  // LOGGING
   console.log(
       `Found ${jsonResp.length} incident(s): ${incidents.length} are new.`
   );
 
   // Iterate through each new item
   const postedIncidents = incidents.filter((incident) => {
-    const createdDate = new Date(incident.created);
+    const updateDate = new Date(incident['most-recent-update'].when);
     // Post items to Hangouts Chat
     const posted = postUpdate(incident);
     // Update last post date property
-    if (posted) {
-      scriptProps.setProperty('lastPost', createdDate.getTime());
+    if (posted && updateDate.getTime() > lastPost.getTime()) {
+      scriptProps.setProperty('lastPost', updateDate.getTime());
       return true;
     }
   });
 
+  // LOGGING
   console.log(`${postedIncidents.length}/${incidents.length} incidents posted`);
 }

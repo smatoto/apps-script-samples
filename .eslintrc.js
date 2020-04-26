@@ -8,7 +8,13 @@ module.exports = {
   },
   rules: {
     'comma-dangle': ['error', 'never'],
-    'max-len': ['error', { code: 110 }],
+    'max-len': [
+      'error',
+      {
+        code: 125,
+        ignoreUrls: true
+      }
+    ],
     camelcase: 'off', // Off for destructuring
     'async-await/space-after-async': 2,
     'async-await/space-after-await': 2,
