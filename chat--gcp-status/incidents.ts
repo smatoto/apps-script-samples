@@ -29,27 +29,11 @@ function postUpdate(incident) {
   let posted = false;
 
   // Destructe incident data
-  const {
-    begin,
-    created,
-    external_desc,
-    ['most-recent-update']: update,
-    severity,
-    service_name,
-    uri
-  } = incident;
+  const { begin, created, external_desc, ['most-recent-update']: update, severity, service_name, uri } = incident;
 
   // Parse dates
-  const beginString = Utilities.formatDate(
-      new Date(begin),
-      'GMT',
-      'MM-dd-yyyy HH:mm:ss z'
-  );
-  const updateString = Utilities.formatDate(
-      new Date(update.when),
-      'GMT',
-      'MM-dd-yyyy HH:mm:ss z'
-  );
+  const beginString = Utilities.formatDate(new Date(begin), 'GMT', 'MM-dd-yyyy HH:mm:ss z');
+  const updateString = Utilities.formatDate(new Date(update.when), 'GMT', 'MM-dd-yyyy HH:mm:ss z');
 
   /**
    * Build Hangouts Chat simple message
@@ -66,9 +50,9 @@ function postUpdate(incident) {
   // Truncate the update message to fit Chat message limit
   const txtLen = update.text.length;
   const text =
-    txtLen < 3000 ?
-      update.text :
-      update.text.substring(0, 3000) +
+    txtLen < 3000
+      ? update.text
+      : update.text.substring(0, 3000) +
         `*---Message too long, truncating. See <https://status.cloud.google.com${uri}|incident page> for full details.---*`;
 
   // Build full message
@@ -79,8 +63,8 @@ function postUpdate(incident) {
     method: 'post',
     contentType: 'application/json',
     payload: JSON.stringify({
-      text: message
-    })
+      text: message,
+    }),
   };
 
   // Sent POST request to webhook
@@ -117,9 +101,7 @@ function getIncidents() {
   });
 
   // LOGGING
-  console.log(
-      `Found ${jsonResp.length} incident(s): ${incidents.length} are new.`
-  );
+  console.log(`Found ${jsonResp.length} incident(s): ${incidents.length} are new.`);
 
   // Iterate through each new item
   const postedIncidents = incidents.filter((incident) => {

@@ -26,11 +26,12 @@ Create a new [Container-bound script](https://developers.google.com/apps-script/
 
 ### Set Vision API Key
 
-1.  From the Apps Script editor, update the question constant with the following values:
+1.  From the Apps Script editor, access the Script properties via **File** > **Project properties** > **Script properties** > **Add row**.
+1.  Add a new property with the following name and value:
 
-    | Key      | Value            |
-    | -------- | ---------------- |
-    | `apiKey` | {Vision API key} |
+    | Property | Value          |
+    | -------- | -------------- |
+    | `apiKey` | Vision API key |
 
     _Note: Refer to the following guide on how to generate GCP API keys: [Using API Keys](https://cloud.google.com/docs/authentication/api-keys?hl=en)_
 

@@ -23,12 +23,12 @@ Create a new [Container-bound script](https://developers.google.com/apps-script/
 
 1.  From the Apps Script editor, update the questions by modifying or adding new array items (objects):
 
-    | Key      | Value                                   |
-    | -------- | --------------------------------------- |
-    | `title`  | {Title of question to modify}           |
-    | `sheet`  | {Sheet name that contains the data}     |
-    | `range`  | {Range (column) that contains the data} |
-    | `formId` | {ID of the Google Form to update}       |
+    | Key      | Value description                     |
+    | -------- | ------------------------------------- |
+    | `title`  | Title of question to modify           |
+    | `sheet`  | Sheet name that contains the data     |
+    | `range`  | Range (column) that contains the data |
+    | `formId` | ID of the Google Form to update       |
 
 1.  Add more questions (elements) to the array of questions if required.
 

@@ -1,0 +1,14 @@
+{
+  "name": "chat--calendar-events",
+  "version": "1.0.0",
+  "description": "Apps Script sample for sending Google Chat messages (via webhook) for calendar events",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "deploy": "clasp push --watch"
+  },
+  "author": "Sermil Matoto",
+  "license": "ISC",
+  "dependencies": {
+    "@types/google-apps-script": "^1.0.20"
+  }
+}

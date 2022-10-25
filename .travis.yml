@@ -1,12 +1,13 @@
 language: node_js
 node_js:
-  - "node"
+  - 'node'
 branches:
   only:
     - master
+    - staging
 before_install:
   - npm install -g
 cache:
   directories:
-  - node_modules/
+    - node_modules/
 script: npm run lint

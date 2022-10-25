@@ -1,10 +1,10 @@
 module.exports = {
   extends: 'google', // Google JS Style
   parserOptions: {
-    ecmaVersion: 2017 // V8 engine compatibility
+    ecmaVersion: 2017, // V8 engine compatibility
   },
   env: {
-    node: true
+    node: true,
   },
   rules: {
     'comma-dangle': ['error', 'never'],
@@ -12,8 +12,8 @@ module.exports = {
       'error',
       {
         code: 125,
-        ignoreUrls: true
-      }
+        ignoreUrls: true,
+      },
     ],
     camelcase: 'off', // Off for destructuring
     'async-await/space-after-async': 2,
@@ -21,7 +21,7 @@ module.exports = {
     eqeqeq: 2,
     'guard-for-in': 'off',
     'no-var': 'off',
-    'no-unused-vars': 'off'
+    'no-unused-vars': 'off',
   },
-  plugins: ['async-await']
+  plugins: ['async-await'],
 };

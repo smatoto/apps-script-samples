@@ -1,9 +1,9 @@
 /**
  * Write OCR text to Google Sheets
- * @param  {Object} sheet The responses sheet details
- * @param  {String} text The OCR text to write
+ * @param  {any} sheet The responses sheet details
+ * @param  {string} text The OCR text to write
  */
-function writeSheet(sheet, text) {
+function writeSheet(sheet: any, text: String) {
   // Get the spreadsheet and writeSheet the OCR text
   const ss = SpreadsheetApp.getActiveSpreadsheet().getSheetByName(sheet.name);
   ss.getRange(sheet.row, sheet.col).setValue(text);
@@ -11,10 +11,10 @@ function writeSheet(sheet, text) {
 
 /**
  * Get OCR text from uploaded Drive image
- * @param  {String} imageId A unique opaque ID for each Drive file
- * @return {String} The extracted OCR text
+ * @param  {string} imageId A unique opaque ID for each Drive file
+ * @return {string} The extracted OCR text
  */
-function getOcrText(imageId) {
+function getOcrText(imageId: string) {
   // Get Vision API credentials
   const props = PropertiesService.getScriptProperties();
   const apiKey = props.getProperty('apiKey');
@@ -32,16 +32,16 @@ function getOcrText(imageId) {
     requests: [
       {
         image: {
-          content: Utilities.base64Encode(imageBytes)
+          content: Utilities.base64Encode(imageBytes),
         },
         features: [
           {
             type: 'TEXT_DETECTION',
-            maxResults: 10
-          }
-        ]
-      }
-    ]
+            maxResults: 10,
+          },
+        ],
+      },
+    ],
   });
 
   // Send request to Vision API
@@ -49,7 +49,7 @@ function getOcrText(imageId) {
     method: 'POST',
     contentType: 'application/json',
     payload: payload,
-    muteHttpExceptions: true
+    muteHttpExceptions: true,
   }).getContentText();
 
   // Fetch and parse Vision API response
@@ -64,12 +64,14 @@ function getOcrText(imageId) {
  * Get Google Form event object on submission
  * @param {Object} e The Google Form event object
  */
-function onFormSubmit(e) {
+function onFormSubmit(e: any) {
+  const name = '<Sheet Name>';
+  const col = '<Column Number>';
   // Define Google Sheet responses details
   const sheet = {
-    name: '<Sheet Name>',
-    col: '<Column Number>',
-    row: e.range.rowStart // Prevent issues with concurrent uploads
+    name,
+    col,
+    row: e.range.rowStart, // Prevent issues with concurrent uploads
   };
 
   // Define Google Form question item

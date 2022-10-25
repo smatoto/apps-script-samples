@@ -1,5 +1,5 @@
 {
-  "name": "smatoto-apps-script-samples",
+  "name": "apps-script-samples",
   "version": "1.0.0",
   "description": "Collection or random Google Apps Script samples",
   "author": "Sermil Matoto",
@@ -14,7 +14,8 @@
   },
   "keywords": [
     "Apps Script",
-    "JavaScript"
+    "JavaScript",
+    "Typescript"
   ],
   "scripts": {
     "lint": "./node_modules/.bin/eslint **/*.js --fix --quiet"
