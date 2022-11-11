@@ -1,6 +1,6 @@
 # Google Apps Script Samples
 
-![GitHub](https://img.shields.io/github/license/mashape/apistatus.svg) [![Build Status](https://travis-ci.org/smatoto/apps-script-samples.svg?branch=master)](https://travis-ci.org/smatoto/apps-script-samples) ![GitHub last commit (branch)](https://img.shields.io/github/last-commit/smatoto/apps-script-samples/master)
+![GitHub](https://img.shields.io/github/license/mashape/apistatus.svg) [![Build Status](https://travis-ci.org/smatoto/apps-script-samples.svg?branch=master)](https://travis-ci.org/smatoto/apps-script-samples) ![GitHub last commit (branch)](https://img.shields.io/github/last-commit/smatoto/apps-script-samples/main)
 
 A random collection of Apps Script examples.
 
